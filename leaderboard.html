@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="material/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1B1931;
+            color: #fefefe;
+            margin: 0;
+            padding: 0;
+        }
+        .leaderboard-tab-con {
+            padding: 20px;
+        }
+        .header, .leaderboard-item {
+            margin-top: 20px;
+        }
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .header .total-users {
+            display: flex;
+            justify-content: space-between;
+            background-color: #000000;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #fff;
+        }
+        .current-user-stats {
+            background-color: rgba(13, 13, 14, 0.815);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .current-user-stats .user-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .leaderboard-list {
+            margin-top: 20px;
+        }
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #222622;
+            background-color: #151515;
+        }
+        .leaderboard-item:nth-child(1) {
+            background-color: #2d2b1b;
+        }
+        .leaderboard-item:nth-child(2) {
+            background-color: #272728;
+        }
+        .leaderboard-item:nth-child(3) {
+            background-color: #2d241b;
+        }
+        .leaderboard-item .user-info {
+            display: flex;
+            align-items: center;
+        }
+        .leaderboard-item .user-info .avatar {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .leaderboard-item .user-info .user-details {
+            margin-left: 10px;
+        }
+        .leaderboard-item .user-details .username {
+            font-weight: 500;
+            font-size: 16px;
+        }
+        .leaderboard-item .user-details .balance {
+            font-size: 14px;
+            color: #7c7c7c;
+        }
+        .leaderboard-item .user-place {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="leaderboard-tab-con">
+        <!-- Header -->
+        <div class="header">
+            <div class="flex flex-col items-center mt-4 justify-content">
+                <img src="/material/images/cup.png" alt="Trophy" width="80" height="80" class="mb-2">
+                <h1>Leaderboard</h1>
+                <div class="total-users">
+                    <span>Total Supply</span>
+                    <span>100,000,000 BLDX Coins</span>
+                </div>
+            </div>
+
+            <!-- Current User Stats -->
+            <div class="current-user-stats">
+                <div class="user-info">
+                    
+                        <img src="/material/images/logo.png" alt="BLDX Logo" width="40" height="40">
+                   
+                    <div class="user-details">
+                        <div class="username">nikandr_s</div>
+                        <div class="balance">4,646 BLDX</div>
+                    </div>
+                    <div class="user-place">#15,355,328</div>
+                </div>
+            </div>
+
+            <!-- Leaderboard List -->
+            <div class="leaderboard-list">
+                <!-- Leaderboard Items -->
+                <div class="leaderboard-item">
+                    <div class="user-info">
+                    
+                            <img src="/material/images/logo.png" alt="BLDX Logo" width="40" height="40">
+                      
+                        <div class="user-details">
+                            <div class="username">Pishnahad_Sup</div>
+                            <div class="balance">53,137,490 BLDX</div>
+                        </div>
+                    </div>
+                    <div class="user-place">🥇</div>
+                </div>
+
+                <div class="leaderboard-item">
+                    <div class="user-info">
+                       
+                            <img src="/material/images/logo.png" alt="BLDX Logo" width="40" height="40">
+                      
+                        <div class="user-details">
+                            <div class="username">imGet</div>
+                            <div class="balance">52,374,426 BLDX</div>
+                        </div>
+                    </div>
+                    <div class="user-place">🥈</div>
+                </div>
+
+                <div class="leaderboard-item">
+                    <div class="user-info">
+                       
+                            <img src="/material/images/logo.png" alt="BLDX Logo" width="40" height="40">
+                      
+                        <div class="user-details">
+                            <div class="username">Esalat</div>
+                            <div class="balance">45,459,702 BLDX</div>
+                        </div>
+                    </div>
+                    <div class="user-place">🥉</div>
+                </div>
+
+                <div class="leaderboard-item">
+                    <div class="user-info">
+                   
+                            <img src="/material/images/logo.png" alt="BLDX Logo" width="40" height="40">
+                      
+                        <div class="user-details">
+                            <div class="username">mehranseydi</div>
+                            <div class="balance">42,660,196 BLDX</div>
+                        </div>
+                    </div>
+                    <div class="user-place">#4</div>
+                </div>
+
+                <!-- Additional leaderboard items can go here -->
+            </div>
+        </div>
+    </div>
+
+
+    
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>HOME</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>LEADERBOARD</span>
+        </a>
+        <a href="invite-friends.html" class="nav-item">
+            <i class="fas fa-user-friends"></i>
+            <span>FRIENDS</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>TASKS</span>
+        </a>
+        <a href="balance.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>BALANCE</span>
+        </a>
+    </nav>
+
+</body>
+</html>

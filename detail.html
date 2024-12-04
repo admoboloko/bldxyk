@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Tasks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="material/css/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000; 
+            color: #fff; 
+            margin: 0;
+            padding: 0;
+        }
+
+        #balance-container {
+            margin: 20px;
+            font-size: 18px;
+        }
+
+        .task-container {
+            margin: 10px auto;
+            max-width: 600px;
+        }
+
+        .task {
+            margin: 10px auto;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #000000; 
+            border-radius: 12px;
+            background-color: #333030; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            width: 80%;
+        }
+
+        .task:hover {
+            transform: translateY(-5px);
+        }
+
+        .task-detail {
+            display: flex;
+            align-items: center;
+        }
+
+        .task-image img {
+            border-radius: 8px;
+            margin-right: 10px;
+        }
+
+        .task h4 {
+            margin: 0;
+            font-size: 18px;
+            color: #f2f2f2;
+        }
+
+        .task-data {
+            display: flex;
+            align-items: justify;
+            margin-top: 8px;
+        }
+
+        .task-data img {
+            margin-right: 5px;
+        }
+
+        .task-data h5 {
+            margin: 0;
+            color: #ffcc00;
+            font-size: 18px;
+        }
+
+        .task-button {
+            background-color: #ffffff; 
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .task-button:hover {
+            background-color: #2dd60c;
+        }
+
+        @media (max-width: 600px) {
+            .task-container {
+                max-width: 100%;
+            }
+
+            .task-button {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .task h4 {
+                font-size: 16px;
+            }
+           
+            
+        }
+    </style>
+    <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js" defer></script>
+</head>
+<body>
+   
+
+<h2><b>🪙</b></h2><BR>
+       
+    </div><h2><b><u>About BLDX Coin</u></b></h2>
+   
+    <h3>Welcome to BLDX! 🪙💰</h3>
+    <h4>
+        At BLDX, we’re redefining productivity by making it engaging, rewarding, and fun! 🎯💪  
+        <br><br>
+        With BLDX, you can complete tasks, earn tokens, and unlock incredible rewards. 🏆✨  
+        <br><br>
+        Our platform is verified by Telegram 🔒 and seamlessly connects to your TON wallet, enabling quick and secure withdrawals of your hard-earned BLDX. 💳💸  
+    </h4>
+    <h4>
+        <strong>Important Update:</strong>  
+        The BLDX token will officially list on <strong>January 20</strong>. Tokens will be distributed exclusively to <strong>verified accounts</strong> that have completed at least <strong>three Airdrop requirements</strong>.  
+        <br><br>
+        Join the BLDX community today! 🪙🚀 Start mining rewards, earning tokens, and experiencing the future of productivity. 🎉  
+    </h4>
+    
+
+    
+    <nav class="bottom-nav">
+            <a href="home.html" class="nav-item">
+                <i class="fas fa-home"></i>
+                <span>HOME</span>
+            </a>
+            <a href="leaderboard.html" class="nav-item">
+                <i class="fas fa-trophy"></i>
+                <span>LEADERBOARD</span>
+            </a>
+            <a href="invite-friends.html" class="nav-item">
+                <i class="fas fa-user-friends"></i>
+                <span>FRIENDS</span>
+            </a>
+            <a href="task.html" class="nav-item">
+                <i class="fas fa-tasks"></i>
+                <span>TASKS</span>
+            </a>
+            <a href="balance.html" class="nav-item">
+                <i class="fas fa-wallet"></i>
+                <span>BALANCE</span>
+            </a>
+        </nav>
+
+    <script src="material/js/js.js"></script>
+    <script src="material/js/main.js"></script>
+</body>
+</html>

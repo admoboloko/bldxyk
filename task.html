@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Tasks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="material/css/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #1B1931; 
+            color: #fff; 
+            margin: 0;
+            padding: 0;
+        }
+
+        #balance-container {
+            width: 100%;
+            height: 120px;
+            background: #0a3fec;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0px 4px 6px rgba(1, 27, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        #balance-container h2 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #balance-container span {
+            color: #ffcc00;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .tasks.scrollable {
+            max-height: 590px; 
+            overflow-y: auto; 
+            margin: 20px auto;
+            width: 90%;
+            padding-right: 10px;
+            border: 1px solid #000000; 
+        }
+
+        .task-container {
+            margin: 10px auto;
+            max-width: 600px;
+        }
+
+        .task {
+            margin: 10px auto;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* border: 1px solid #000000;  */
+            /* border-radius: 12px; */
+            background-color: #333030; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            width: 80%;
+        }
+
+        .task:hover {
+            transform: translateY(-5px);
+        }
+
+        .task-detail {
+            display: flex;
+            align-items: center;
+        }
+
+        .task-image img {
+            border-radius: 8px;
+            margin-right: 10px;
+        }
+
+        .task h4 {
+            margin: 0;
+            font-size: 18px;
+            color: #f2f2f2;
+        }
+
+        .task-data {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .task-data img {
+            margin-right: 5px;
+        }
+
+        .task-data h5 {
+            margin: 0;
+            color: #ffcc00;
+            font-size: 18px;
+        }
+
+      .task-button {
+            background-color: #ffffff; 
+            color: #1E1A56;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .task-button:hover {
+            background-color: #a2aaa0;
+        }
+
+        nav.bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #0a3fec;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        nav.bottom-nav a {
+            text-decoration: none;
+            color: #fff;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        nav.bottom-nav a i {
+            display: block;
+            font-size: 18px;
+        }
+
+
+        .quests-tab-con {
+            padding: 20px;
+        }
+        .header-text {
+            margin-top: 20px;
+        }
+        .header-text h1 {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .header-text .subheading {
+            font-size: 20px;
+        }
+        .header-text .subheading span {
+            font-weight: bold;
+        }
+        .tab-switcher {
+            display: flex;
+            gap: 0;
+            margin-top: 24px;
+        }
+        .tab-switcher button {
+            flex: 1;
+            padding: 20px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .tab-switcher button.active {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        .tab-switcher button.inactive {
+            background-color: #151515;
+            color: #ffffff;
+        }
+        .task-list {
+            margin-top: 16px;
+            margin-bottom: 80px;
+            background-color: #151516;
+            border-radius: 16px;
+            padding: 16px;
+        }
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            border-top: 1px solid #222622;
+        }
+        .task-item:first-child {
+            border-top: none;
+        }
+        .task-icon-container {
+            width: 72px;
+            display: flex;
+            justify-content: center;
+        }
+        .task-icon {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+        .task-details {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            padding-right: 16px;
+        }
+        .task-details .title {
+            font-size: 17px;
+        }
+        .task-details .reward {
+            font-size: 14px;
+            color: #7c7c7c;
+        }
+        .task-button {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+
+        .tasks.scrollable {
+    max-height: 590px; /* Limit the container's height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    margin: 20px auto;
+    width: 90%;
+    padding-right: 10px;
+    border: 1px solid #000000; 
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #444 #000; /* Custom scrollbar colors for Firefox */
+}
+
+/* Webkit Scrollbar Customization */
+.tasks.scrollable::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.tasks.scrollable::-webkit-scrollbar-track {
+    background: #151515; /* Track background color */
+}
+
+.tasks.scrollable::-webkit-scrollbar-thumb {
+    background-color: #444; /* Scrollbar thumb color */
+    border-radius: 4px; /* Round edges */
+    border: 1px solid #000; /* Optional: border for thumb */
+}
+
+.tasks.scrollable::-webkit-scrollbar-thumb:hover {
+    background-color: #666; /* Hover effect */
+}
+
+
+        @media (max-width: 600px) {
+            .task-container {
+                max-width: 100%;
+            }
+
+            .task-button {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .task h4 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+   <br><br>
+        <!-- <h2>TASKS</h2> -->
+        <span id="balance">0 🪙 total BLDX</span>
+  
+    <div class="quests-tab-con">
+        <!-- Header -->
+                <span class="subheading"><strong>GET REWARDS </strong></span>
+                <span class="subheading">FOR</span>
+            </div>
+            <div class="subheading">
+                <span class="text-gray-500">COMPLETING QUESTS</span>
+            </div>
+        </div>
+
+        <!-- Tab Switcher -->
+        <div class="tab-switcher">
+            <button class="active">In-game</button>
+        </div>
+
+        <!-- Tasks List -->
+      <!-- Task 1 -->
+<div class="task-list scrollable">
+<div class="task-container">
+    <div class="task-item">
+        <div class="task-icon-container">
+            <img src="/material/images/youtube-logo-png-photo-0.png" alt="Youtube" class="task-icon">
+        </div>
+        <div class="task-details">
+            <div>
+                <div class="title">Subscribe</div>
+                <div class="reward">+ 100 BLDX</div>
+            </div>
+            <button class="task-button" onclick="completeTask(100, 'https://youtu.be/aScX2QccdD0?si=hnB-DpVremlzsAXY')">🪙 claim</button>
+        </div>
+    </div>
+</div>
+
+<!-- Task 2 -->
+<div class="task-container">
+    <div class="task-item">
+        <div class="task-icon-container">
+            <img src="/material/images/x-social-media-logo-icon.webp" alt="Tweet about BLDX" class="task-icon">
+        </div>
+        <div class="task-details">
+            <div>
+                <div class="title">Tweet about BLDX</div>
+                <div class="reward">+ 100 BLDX</div>
+            </div>
+            <button class="task-button" onclick="completeTask(100, 'https://youtu.be/aScX2QccdD0?si=hnB-DpVremlzsAXY')">🪙 claim</button>
+        </div>
+    </div>
+</div>
+
+<!-- Task 3 -->
+<div class="task-container">
+    <div class="task-item">
+        <div class="task-icon-container">
+            <img src="/material/images/telegram-logo-transparent-free-png.webp" alt="Follow channel" class="task-icon">
+        </div>
+        <div class="task-details">
+            <div>
+                <div class="title">Follow channel</div>
+                <div class="reward">+ 100 BLDX</div>
+            </div>
+            <button class="task-button" onclick="completeTask(100, 'https://youtu.be/aScX2QccdD0?si=hnB-DpVremlzsAXY')">🪙 claim</button>
+        </div>
+    </div>
+</div>
+
+<!-- Task 4 -->
+<!-- <div class="task-container">
+    <div class="task-item">
+        <div class="task-icon-container">
+            <img src="/material/images/x-social-media-logo-icon.webp" alt="Follow Twitter" class="task-icon">
+        </div>
+        <div class="task-details">
+            <div>
+                <div class="title">Follow Twitter</div>
+                <div class="reward">+ 100 BLDX</div>
+            </div>
+            <button class="task-button" onclick="completeTask(100, 'https://youtu.be/aScX2QccdD0?si=hnB-DpVremlzsAXY')">🪙 claim</button>
+        </div>
+    </div>
+</div> -->
+
+<!-- Task 5 -->
+<div class="task-container">
+    <div class="task-item">
+        <div class="task-icon-container">
+            <img src="/material/images/logo.png" alt="Invite 10 friends" class="task-icon">
+        </div>
+        <div class="task-details">
+            <div>
+                <div class="title">Invite 10 friends</div>
+                <div class="reward">+ 100 BLDX</div>
+            </div>
+            <button class="task-button" onclick="completeTask(100, 'https://youtu.be/aScX2QccdD0?si=hnB-DpVremlzsAXY')">🪙 claim</button>
+        </div>
+    </div>
+</div>
+
+<!-- Task 6 -->
+<div class="task-container">
+    <div class="task-item">
+        <div class="task-icon-container">
+            <img src="/material/images/ton-toncoin-logo.png" alt="Connect wallet" class="task-icon">
+        </div>
+        <div class="task-details">
+            <div>
+                <div class="title">Connect wallet</div>
+                <div class="reward">+ 100 BLDX</div>
+            </div>
+            <button class="task-button" onclick="completeTask(100, 'https://youtu.be/aScX2QccdD0?si=hnB-DpVremlzsAXY')">🪙 claim</button>
+        </div>
+    </div>
+</div>
+
+<!-- Task 7 -->
+<div class="task-container">
+    <div class="task-item">
+        <div class="task-icon-container">
+            <img src="/material/images/logo.png" alt="Claim reward" class="task-icon">
+        </div>
+        <div class="task-details">
+            <div>
+                <div class="title">Claim reward</div>
+                <div class="reward">+ 300 BLDX</div>
+            </div>
+            <button class="task-button" onclick="completeTask(300, 'reword.html')">🪙 claim</button>
+        </div>
+    </div>
+</div>
+
+<!-- Task 8 -->
+<div class="task-container">
+    <div class="task-item">
+        <div class="task-icon-container">
+            <img src="/material/images/logo.png" alt="Verify Account" class="task-icon">
+        </div>
+        <div class="task-details">
+            <div>
+                <div class="title">Verify Account</div>
+                <div class="reward">+ 200 BLDX</div>
+            </div>
+            <button class="task-button" onclick="completeTask(200, 'verify.html')">🪙 claim</button>
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>HOME</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>LEADERBOARD</span>
+        </a>
+        <a href="invite-friends.html" class="nav-item">
+            <i class="fas fa-user-friends"></i>
+            <span>FRIENDS</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>TASKS</span>
+        </a>
+        <a href="balance.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>BALANCE</span>
+        </a>
+    </nav>
+
+    <script src="material/js/js.js"></script>
+    <script src="material/js/main.js"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOLDX COIN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="material/css/styles.css">
+    <style>
+        /* Reset body and html margins/padding */
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #1B1931; 
+            color: #fff; 
+        }
+
+        .shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -30%; /* Start off-screen */
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(to right,
+      transparent 0%,
+      rgba(0, 122, 255, 0.3) 50%,
+      transparent 100%);
+  animation: shine 7s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -30%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: -30%;
+  }
+}
+
+
+        /* Rounded box styling */
+        .rounded-box {
+            width: 100%; /* Full width */
+            height: 120px; /* Adjust the height as needed */
+            background: #0a3fec; /* Gradient effect */
+            border-radius: 0 0 20px 20px; /* Rounded bottom corners */
+            box-shadow: 0px 4px 6px rgba(1, 27, 255, 0.2); /* Optional shadow for depth */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #balance-container {
+            font-size: 18px;
+        }
+
+        /* Task container styles */
+        .task-container {
+            margin: 10px auto;
+            max-width: 600px;
+        }
+
+        .task {
+            margin: 10px auto;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #000000; 
+            border-radius: 12px;
+            background-color: #000000; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            width: 80%;
+        }
+
+        .task:hover {
+            transform: translateY(-5px);
+        }
+
+        .task-detail {
+            display: flex;
+            align-items: center;
+        }
+
+        .task-image img {
+            border-radius: 8px;
+            margin-right: 10px;
+        }
+
+        .task h4 {
+            margin: 0;
+            font-size: 18px;
+            color: #f2f2f2;
+        }
+
+        .task-data {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .task-data img {
+            margin-right: 5px;
+        }
+
+        .task-data h5 {
+            margin: 0;
+            color: #ffcc00;
+            font-size: 18px;
+        }
+
+        .task-button {
+            background-color: #ffffff; 
+            color: #1E1A56;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .task-button:hover {
+            background-color: #a2aaa0;
+        }
+
+
+
+        #progress-container {
+        width: 80%;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    #progress-bar {
+        width: 100%;
+        height: 20px;
+        background-color: #555;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+        margin: 10px 0;
+    }
+
+    #progress-bar-fill {
+        height: 100%;
+        width: 100%;
+        background-color: #0a3fec;
+        transition: width 1s linear;
+    }
+
+    #timer {
+        margin: 10px 0;
+        font-size: 18px;
+        color: #0a3fec;
+    }
+
+    #BLDX-reward {
+        margin: 10px 0;
+        font-size: 24px;
+        color: #ffcc00;
+        font-weight: bold;
+    }
+
+    #start-mining {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #0a3fec;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    #start-mining:hover {
+        background-color: #a2aaa0;
+    }
+
+        @media (max-width: 600px) {
+            .task-container {
+                max-width: 100%;
+            }
+
+            .task-button {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .task h4 {
+                font-size: 16px;
+            }
+        }
+
+
+
+
+
+
+        #loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1B1931; /* Match background of your site */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    
+    <div id="loading-screen">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <div class="rounded-box">
+        <div id="balance-container">
+            <h4 style="font-family: 'Arial', sans-serif; font-size: 20px; color: #ffffff; text-align: center;">
+                🪙 BOLDX BLDX
+            </h4>
+            <span id="balance">0</span> Total BLDX
+        </div>
+        
+    </div>
+
+
+<div id="progress-container">
+    <div id="progress-bar">
+        <div id="progress-bar-fill"></div>
+    </div>
+    <div id="timer">4:00:00</div>
+    <div id="BLDX-reward">100 BLDX</div>
+    <button id="start-mining">Start Mining</button>
+</div>
+
+    <br>
+
+    <div class="coin-container">
+        <div class="task-image">
+            <img src="material/images/logo.png" width="50%">
+        </div>
+        <div class="task-container">
+            <div class="task shine-effect">
+                <div class="task-detail ">
+                    <div class="task-image">
+                        <img src="material/images/logo.png" width="45px" alt="">
+                    </div>
+                    <div>
+                        <h4>Claim Rewards</h4>
+                        <div class="task-data">
+                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
+                            <h5>300</h5>
+                        </div>
+                    </div>
+                </div>
+                <button class="task-button" onclick="window.location.href='task.html'">🪙Claim</button>
+            </div>
+        
+            <div class="task shine-effect">
+                <div class="task-detail ">
+                    <div class="task-image">
+                        <img src="material/images/logo.png" width="45px" alt="">
+                    </div>
+                    <div>
+                        <h4>Verify and Earn</h4>
+                        <div class="task-data">
+                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
+                            <h5>200</h5>
+                        </div>
+                    </div>
+                </div>
+                <button class="task-button" onclick="window.location.href='task.html'">🪙Claim</button>
+            </div>
+        </div>
+        
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>HOME</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>LEADERBOARD</span>
+        </a>
+        <a href="invite-friends.html" class="nav-item">
+            <i class="fas fa-user-friends"></i>
+            <span>FRIENDS</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>TASKS</span>
+        </a>
+        <a href="balance.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>BALANCE</span>
+        </a>
+    </nav>
+ 
+    
+    <script>
+        const progressBarFill = document.getElementById("progress-bar-fill");
+        const timerDisplay = document.getElementById("timer");
+        const startMiningButton = document.getElementById("start-mining");
+        const claimButton = document.createElement("button"); // Create the Claim button
+        const BLDXReward = document.getElementById("BLDX-reward");
+        const balanceDisplay = document.getElementById("balance");
+    
+        const totalTime = 4 * 60 * 60; // 4 hours in seconds
+        const rewardAmount = 100; // BLDX coins reward
+    
+        let userId = localStorage.getItem("userId");
+        if (!userId) {
+            userId = generateUniqueId();
+            localStorage.setItem("userId", userId);
+        }
+    
+        let timeLeft = parseInt(localStorage.getItem(`timeLeft_${userId}`), 10) || totalTime;
+        let progressWidth = parseFloat(localStorage.getItem(`progressWidth_${userId}`)) || 100;
+        let lastSavedTime = parseInt(localStorage.getItem(`lastSavedTime_${userId}`), 10) || Date.now();
+        let balance = parseInt(localStorage.getItem("balance")) || 0;
+    
+        function generateUniqueId() {
+            return 'user_' + Math.random().toString(36).substr(2, 9);
+        }
+    
+        function initialize() {
+            const now = Date.now();
+            const elapsedTime = Math.floor((now - lastSavedTime) / 1000); // Elapsed time in seconds
+    
+            // Adjust remaining time and progress width based on elapsed time
+            if (elapsedTime > 0) {
+                timeLeft = Math.max(timeLeft - elapsedTime, 0);
+                progressWidth = Math.max(progressWidth - (100 * elapsedTime) / totalTime, 0);
+            }
+    
+            localStorage.setItem(`timeLeft_${userId}`, timeLeft);
+            localStorage.setItem(`progressWidth_${userId}`, progressWidth);
+            lastSavedTime = now;
+            localStorage.setItem(`lastSavedTime_${userId}`, lastSavedTime);
+    
+            updateTimerDisplay();
+            progressBarFill.style.width = `${progressWidth}%`;
+    
+            if (timeLeft <= 0) {
+                showClaimButton();
+            } else {
+                hideClaimButton();
+                if (localStorage.getItem(`miningStarted_${userId}`) === 'true') {
+                    startMining();
+                } else {
+                    startMiningButton.disabled = false;
+                    startMiningButton.textContent = "Start Mining";
+                }
+            }
+    
+            updateBalanceDisplay();
+        }
+    
+        function updateTimerDisplay() {
+            const hours = Math.floor(timeLeft / 3600);
+            const minutes = Math.floor((timeLeft % 3600) / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${hours.toString().padStart(2, "0")}:${minutes
+                .toString()
+                .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+    
+            // Update mined coins in the reward section
+            BLDXReward.textContent = `${Math.floor(
+                rewardAmount * (1 - timeLeft / totalTime)
+            )} BLDX`;
+        }
+    
+        function startMining() {
+            startMiningButton.disabled = true;
+            startMiningButton.textContent = "Mining...";
+            localStorage.setItem(`miningStarted_${userId}`, 'true');
+    
+            const interval = 1000; // Update every second
+    
+            countdownInterval = setInterval(() => {
+                const now = Date.now();
+                const elapsedTime = Math.floor((now - lastSavedTime) / 1000);
+    
+                // Only decrease timeLeft and progressWidth by the elapsed time, don't reset them
+                timeLeft = Math.max(timeLeft - elapsedTime, 0);
+                progressWidth = Math.max(progressWidth - (100 * elapsedTime) / totalTime, 0);
+                lastSavedTime = now;
+    
+                localStorage.setItem(`lastSavedTime_${userId}`, lastSavedTime);
+                updateTimerDisplay();
+                progressBarFill.style.width = `${progressWidth}%`;
+    
+                localStorage.setItem(`timeLeft_${userId}`, timeLeft);
+                localStorage.setItem(`progressWidth_${userId}`, progressWidth);
+    
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    showClaimButton();
+                    localStorage.setItem(`miningStarted_${userId}`, 'false');
+                }
+            }, interval);
+        }
+    
+        function updateBalanceDisplay() {
+            // Update total balance at the top
+            balanceDisplay.textContent = balance;
+        }
+    
+        function showClaimButton() {
+            clearInterval(countdownInterval);
+            claimButton.textContent = "🪙 Claim";
+            claimButton.className = "task-button";
+            claimButton.onclick = () => {
+                // Add reward to the user's balance
+                balance += rewardAmount;
+                localStorage.setItem("balance", balance);
+    
+                // Reset timer and progress bar
+                timeLeft = totalTime;
+                progressWidth = 100;
+                localStorage.setItem(`timeLeft_${userId}`, timeLeft);
+                localStorage.setItem(`progressWidth_${userId}`, progressWidth);
+    
+                updateBalanceDisplay(); // Update balance on the UI
+                initialize(); // Re-initialize the state
+                hideClaimButton();
+            };
+    
+            startMiningButton.style.display = "none";
+            document.getElementById("progress-container").appendChild(claimButton);
+        }
+    
+        function hideClaimButton() {
+            if (claimButton.parentElement) {
+                claimButton.parentElement.removeChild(claimButton);
+            }
+            startMiningButton.style.display = "inline-block";
+        }
+    
+        startMiningButton.addEventListener("click", startMining);
+        initialize();
+    </script>
+    
+    
+    
+    <script src="material/js/js.js"></script>
+    <script src="material/js/main.js"></script>
+
+
+    <script>
+        // Remove the loading screen once the page has fully loaded
+        window.addEventListener("load", () => {
+            const loadingScreen = document.getElementById("loading-screen");
+            loadingScreen.style.display = "none"; // Hide the loading screen
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading</title>
+    <style>
+        /* Fullscreen loading screen */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1B1931; /* Match your theme */
+            font-family: Arial, sans-serif;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Loading text */
+        #loading-text {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Progress bar container */
+        #loading-bar-container {
+            width: 80%;
+            max-width: 500px;
+            height: 30px;
+            background: #555;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        /* Progress bar fill */
+        #loading-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #0a3fec, #42a5f5);
+            transition: width 0.3s ease-in-out;
+        }
+
+        /* Proceed button */
+        #proceed-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #0a3fec;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none; /* Initially hidden */
+        }
+
+        #proceed-button:hover {
+            background-color: #3e8ef1;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <div id="loading-text">Loading, please wait...</div>
+    <div id="loading-bar-container">
+        <div id="loading-bar-fill"></div>
+    </div>
+    <button id="proceed-button" onclick="window.location.href='index.html'">Proceed</button>
+
+    <script>
+        // Simulate loading progress
+        const loadingBarFill = document.getElementById("loading-bar-fill");
+        const proceedButton = document.getElementById("proceed-button");
+        let progress = 0;
+
+        const loadingInterval = setInterval(() => {
+            progress += 10; // Increment progress
+            loadingBarFill.style.width = `${progress}%`;
+
+            // Check if loading is complete
+            if (progress >= 100) {
+                clearInterval(loadingInterval); // Stop the interval
+                proceedButton.style.display = "block"; // Show the Proceed button
+                document.getElementById("loading-text").textContent = "Loading Complete!";
+            }
+        }, 500); // Update every 500ms
+    </script>
+</body>
+</html>

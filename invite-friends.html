@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invite Friends</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="material/css/styles.css">
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1B1931;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0 10px;
+            font-size: 2rem;
+        }
+
+        .frens-invite {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .frens-invite p {
+            color: gray;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .invite-image {
+            margin: 20px auto;
+            width: 80px;
+            height: 80px;
+            background-color: #333;
+            border-radius: 50%;
+        }
+
+        .frens-invite button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .frens-invite button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #0a3fec;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-item {
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            font-size: 12px;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            display: block;
+        }
+
+        .nav-item:hover {
+            color: #007bff;
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1e1e1e;
+            color: white;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px 10px 0 0;
+            padding: 20px;
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .modal.show {
+            display: block;
+            transform: translateY(0);
+        }
+
+        .modal .option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            cursor: pointer;
+        }
+
+        .modal .option:hover {
+            background: #333;
+            border-radius: 5px;
+        }
+
+        .modal .option i {
+            font-size: 18px;
+        }
+
+        .modal-close {
+            text-align: right;
+            cursor: pointer;
+            font-size: 16px;
+            color: rgb(255, 255, 255);
+        }
+
+        .modal-close:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="invite-text">
+        <h1>INVITE FRIENDS</h1>
+        <p><strong>SHARE</strong> YOUR INVITATION LINK & <strong>GET 10%</strong> OF FRIEND'S POINTS</p>
+    </div>
+    
+    <div class="frens-invite">
+        <div class="invite-image">
+            <img src="material/images/logo.png" width="70%">
+            <p style="color: gray; margin-top: 10px;">No Invite Yet!</p>
+        </div>
+        <button id="inviteButton">Invite</button>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>HOME</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>LEADERBOARD</span>
+        </a>
+        <a href="invite-friends.html" class="nav-item">
+            <i class="fas fa-user-friends"></i>
+            <span>FRIENDS</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>TASKS</span>
+        </a>
+        <a href="balance.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>BALANCE</span>
+        </a>
+    </nav>
+
+    <!-- Modal -->
+    <div class="modal" id="inviteModal">
+        <div class="modal-close" id="modalClose">&times;</div>
+        <div class="option" id="sendTelegram">
+            <i class="fas fa-telegram"></i>
+            <span>Send via Telegram</span>
+        </div>
+        <div class="option" id="copyLink">
+            <i class="fas fa-link"></i>
+            <span>Copy Link</span>
+        </div>
+    </div>
+
+    <script>
+        // Your bot invite link
+        const telegramInviteLink = 'https://t.me/oblxx_bot/OBLX';
+
+        // Get elements
+        const inviteButton = document.getElementById('inviteButton');
+        const inviteModal = document.getElementById('inviteModal');
+        const modalClose = document.getElementById('modalClose');
+        const sendTelegram = document.getElementById('sendTelegram');
+        const copyLink = document.getElementById('copyLink');
+
+        // Show the modal
+        inviteButton.addEventListener('click', () => {
+            inviteModal.classList.add('show');
+        });
+
+        // Close the modal
+        modalClose.addEventListener('click', () => {
+            inviteModal.classList.remove('show');
+        });
+
+        // Send to Telegram
+        sendTelegram.addEventListener('click', () => {
+            window.open(telegramInviteLink, '_blank');
+        });
+
+        // Copy Link
+        copyLink.addEventListener('click', () => {
+            navigator.clipboard.writeText(telegramInviteLink).then(() => {
+                alert('Invite link copied to clipboard!');
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === inviteModal) {
+                inviteModal.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
